@@ -3,7 +3,7 @@ Into to deep learning Koopman operators
 ===
 Author: Nicholas Geneva (MIT Liscense)
 url: https://nicholasgeneva.com/blog/
-github: https://github.com/AbsoluteStratos/blog-code
+github: https://github.com/NickGeneva/blog-code
 ===
 '''
 import torch
