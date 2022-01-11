@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#$ -M <EMAIL>   # Email address for job notification
+#$ -m abe            # Send mail when job begins, ends and aborts
+#$ -pe mpi-24 24     # Specify parallel environment and legal core size
+#$ -q <QUEUE>         # Specify queue
+#$ -N parallel_nn       # Specify job name
+#$ -l gpu_card=4       # Additional cluster option
+
+# EXAMPLE SGE SUBMISSION SCRIPT 
+
+conda activate base
+conda activate nccl2 # My parallel conda env
+
+module load mpich/3.3/gcc/8.3.0 # Load cluster MPI
+
+cd <PROJECT FOLDER HERE>
+
+export GLOO_SOCKET_IFNAME=ens1f0
+export NCCL_SOCKET_IFNAME=ens1f0 
+# export NCCL_IB_DISABLE=1 
+
+mpirun -np 8 -ppn 4 python main.py --comm gloo # Application to execute
