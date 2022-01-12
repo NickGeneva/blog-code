@@ -6,7 +6,7 @@
 conda install openmpi openmpi-mpicc
 pip install mpi4py
 ```
-Depending on the machine you are running you may have to install mpi4py installing from source using pre-existing MPI libaries.
+Depending on the machine you are running you may have to install mpi4py installing from source using pre-existing MPI libaries. See [mpi.py](https://github.com/NickGeneva/blog-code/blob/master/parallel-nn/distributed/mpi.py) for some details, otherwise check the docs.
 
 ### Conda install NCCL
 ```
@@ -38,4 +38,15 @@ mpirun -np 4 python main_franke.py --comm gloo
 Running NCCL (PyTorch) with 4 tasks:
 ```
 mpirun -np 4 python main_franke.py --comm ncclp
+```
+
+### MNIST VAE
+Running NCCL with 2 tasks:
+```
+mpirun -np 2 python main_mnist.py --comm nccl --train-batch-size 128
+```
+
+Running NCCL with 8 tasks on two nodes:
+```
+mpirun -np 8 -ppn 4 python main_mnist.py --comm nccl --train-batch-size 512
 ```
